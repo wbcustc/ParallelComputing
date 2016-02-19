@@ -11,7 +11,8 @@ int main(int argc, char **argv){
   MPI_Comm_size(MPI_COMM_WORLD, &sz);
   MPI_Comm_rank(MPI_COMM_WORLD, &myid);
   int data[BLOCK_SIZE];
-  for(int i = 0;i < BLOCK_SIZE;i++){
+  int i;
+  for(i = 0;i < BLOCK_SIZE;i++){
     data[i] = i;
   }
   int dest = sz - myid - 1; 
@@ -23,7 +24,7 @@ int main(int argc, char **argv){
       
       starttime = MPI_Wtime();
       // Send 1000 times to calculate the average message latency. 
-      for(int i = 0;i<REP_TIMES;i++){
+      for(i = 0;i<REP_TIMES;i++){
         MPI_Send(data, block, MPI_INT, dest, 0,
                    MPI_COMM_WORLD);
       
@@ -33,7 +34,7 @@ int main(int argc, char **argv){
       endtime = MPI_Wtime();
       printf("That took %f milliseconds\n",(endtime-starttime)*1000000.0/REP_TIMES);
     } else {
-      for(int i = 0;i<REP_TIMES;i++){
+      for(i = 0;i<REP_TIMES;i++){
       MPI_Recv(data, block, MPI_INT, dest, 0,
                  MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       

@@ -5,14 +5,16 @@
 
 void init_vec(float *vec, int n){
 	srand(time(NULL));
-	for(int i = 0;i < n;i++){
+	int i;
+	for(i = 0;i < n;i++){
 		vec[i] = rand()/1000000000.0;
 	}
 }
 
 float calculate(float *vec1,float *vec2, int n){
 	float sum = 0.0;
-	for(int i = 0;i<n;i++){
+	int i;
+	for(i = 0;i<n;i++){
 		sum += (*(vec1+i)) * (*(vec2+i));
 	}
 	return sum;
@@ -38,7 +40,7 @@ int main(int argc, char **argv){
 
 	}
 
-    float *temp_vec1 = (float *)malloc(blocksize*sizeof(float));
+	float *temp_vec1 = (float *)malloc(blocksize*sizeof(float));
 	float *temp_vec2 = (float *)malloc(blocksize*sizeof(float));
 	
 	// Dispatch the data chunk into different processors from processor 0.
