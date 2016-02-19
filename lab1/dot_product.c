@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>
-#define VECTOR_SIZE 1024*1024
+#define VECTOR_SIZE (1024*1024)
 
 void init_vec(float *vec, int n){
 	srand(time(NULL));
@@ -58,7 +58,7 @@ int main(int argc, char **argv){
 	
 	if(myid == 0) {
 		endtime = MPI_Wtime();
-		printf("Time cost is %lf\n", (endtime-starttime)*1000000.0);
+		printf("Time cost is %lf\n", (endtime-starttime)*1000000000.0/VECTOR_SIZE);
 		printf("Product is %lf\n", global);
 	}
 
